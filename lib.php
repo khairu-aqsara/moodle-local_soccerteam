@@ -15,17 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * English language pack for Moodle Soccerteam
+ * Library of functions for local_soccerteam
  *
  * @package    local_soccerteam
- * @category   string
  * @copyright  2025 Khairu Aqsara <wenkhairu@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Extends navigation for the soccer team plugin.
+ *
+ * @param global_navigation $navigation The navigation object
+ * @param stdClass $course The course object
+ * @param context_course $context The course context
+ * @return void
+ */
+function local_soccerteam_extend_navigation_course($navigation, $course, $context) {
+    if (has_capability('local/soccerteam:view', $context)) {
+        $url = new moodle_url('/local/soccerteam/index.php', ['id' => $course->id]);
+        $navigation->add(
+            get_string('pluginname', 'local_soccerteam'),
+            $url,
+            navigation_node::TYPE_SETTING,
+            null,
+            'soccerteam',
+            new pix_icon('i/groups', '')
+        );
+    }
+}
 
-$string['pluginname'] = 'Soccer Team';
-$string['privacy:metadata'] = 'The Moodle Soccerteam plugin doesn\'t store any personal data.';
-$string['soccerteam:manage'] = 'Manage Moodle Soccer Team';
-$string['soccerteam:view'] = 'View Moodle Soccer Team';
