@@ -15,18 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for Moodle Soccerteam
+ * Moodle Soccer Team plugin main entry point
  *
  * @package    local_soccerteam
  * @copyright  2025 Khairu Aqsara <wenkhairu@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+require_once('../../config.php');
+require_once($CFG->dirroot . '/local/soccerteam/lib.php');
 
-$plugin->component    = 'local_soccerteam';
-$plugin->release      = '1.0';
-$plugin->version      = 2025050101;
-$plugin->requires     = 2022112800; // Moodle 4.1.
-$plugin->supported    = [401, 500]; // Supported from Moodle 4.1 to 5.0.
-$plugin->maturity     = MATURITY_STABLE;
+// Get course ID parameter.
+$id = required_param('id', PARAM_INT);
+
+// Require login for the course.
+$course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
+require_login($course);
+
+// Redirect to the team overview page.
+redirect(new moodle_url('/local/soccerteam/teamoverview.php', ['id' => $id]));

@@ -1,0 +1,135 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_soccerteam/team_overview
+
+    Template for displaying the soccer team overview.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * courseid - The course ID
+    * has_members - Boolean flag for if there are team members
+    * members - Array of team members
+    * positions - Array of position filter options
+    * position_filter - Current position filter value
+    * sort_by - Current sort field
+    * sort_direction - Current sort direction
+    * sort_direction_inverse - Inverse of current sort direction
+    * wwwroot - Moodle's base URL
+}}
+
+<div class="local-soccerteam-overview">
+    <h3>{{#str}}teamoverview, local_soccerteam{{/str}}</h3>
+
+    <div class="local-soccerteam-controls mb-3">
+        <form action="{{wwwroot}}/local/soccerteam/teamoverview.php" method="get" class="form-inline">
+            <input type="hidden" name="id" value="{{courseid}}">
+
+            <div class="form-group mr-2">
+                <label for="positionfilter" class="mr-1">{{#str}}filterbyposition, local_soccerteam{{/str}}</label>
+                <select name="position" id="positionfilter" class="form-control" onchange="this.form.submit()">
+                    {{#positions}}
+                        <option value="{{value}}" {{#selected}}selected{{/selected}}>{{name}}</option>
+                    {{/positions}}
+                </select>
+            </div>
+
+            {{#can_edit}}
+                <a href="{{wwwroot}}/local/soccerteam/teammanager.php?courseid={{courseid}}" class="btn btn-primary">
+                    {{#str}}addnewplayer, local_soccerteam{{/str}}
+                </a>
+            {{/can_edit}}
+        </form>
+    </div>
+
+    {{#has_members}}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center" width="8%">
+                        <a href="{{wwwroot}}/local/soccerteam/teamoverview.php?id={{courseid}}&sortby=jerseynumber&sortdirection={{#sort_by_is_jerseynumber}}{{sort_direction_inverse}}{{/sort_by_is_jerseynumber}}{{^sort_by_is_jerseynumber}}ASC{{/sort_by_is_jerseynumber}}&position={{position_filter}}">
+                            {{#str}}jerseynumber, local_soccerteam{{/str}}
+                            {{#sort_by_is_jerseynumber}}
+                                {{#sort_direction_is_asc}}↑{{/sort_direction_is_asc}}
+                                {{#sort_direction_is_desc}}↓{{/sort_direction_is_desc}}
+                            {{/sort_by_is_jerseynumber}}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{wwwroot}}/local/soccerteam/teamoverview.php?id={{courseid}}&sortby=lastname&sortdirection={{#sort_by_is_lastname}}{{sort_direction_inverse}}{{/sort_by_is_lastname}}{{^sort_by_is_lastname}}ASC{{/sort_by_is_lastname}}&position={{position_filter}}">
+                            {{#str}}playername, local_soccerteam{{/str}}
+                            {{#sort_by_is_lastname}}
+                                {{#sort_direction_is_asc}}↑{{/sort_direction_is_asc}}
+                                {{#sort_direction_is_desc}}↓{{/sort_direction_is_desc}}
+                            {{/sort_by_is_lastname}}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{wwwroot}}/local/soccerteam/teamoverview.php?id={{courseid}}&sortby=position&sortdirection={{#sort_by_is_position}}{{sort_direction_inverse}}{{/sort_by_is_position}}{{^sort_by_is_position}}ASC{{/sort_by_is_position}}&position={{position_filter}}">
+                            {{#str}}position, local_soccerteam{{/str}}
+                            {{#sort_by_is_position}}
+                                {{#sort_direction_is_asc}}↑{{/sort_direction_is_asc}}
+                                {{#sort_direction_is_desc}}↓{{/sort_direction_is_desc}}
+                            {{/sort_by_is_position}}
+                        </a>
+                    </th>
+                    {{#can_edit}}
+                        <th class="text-center">{{#str}}actions, local_soccerteam{{/str}}</th>
+                    {{/can_edit}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#members}}
+                    <tr>
+                        <td class="text-center">{{jerseynumber}}</td>
+                        <td>{{fullname}}</td>
+                        <td>{{position_localized}}</td>
+                        {{#can_edit}}
+                            <td class="text-center">
+                                <a href="{{wwwroot}}/local/soccerteam/teammanager.php?courseid={{courseid}}&userid={{userid}}" title="{{#str}}edit{{/str}}">
+                                    <i class="icon fa fa-edit"></i>
+                                </a>
+                                <a href="{{wwwroot}}/local/soccerteam/teammanager.php?courseid={{courseid}}&delete={{userid}}&sesskey={{sesskey}}" class="text-danger" onclick="return confirm('{{#str}}confirmdelete, local_soccerteam{{/str}}');">
+                                    <i class="icon fa fa-trash"></i>
+                                </a>
+                            </td>
+                        {{/can_edit}}
+                    </tr>
+                {{/members}}
+            </tbody>
+        </table>
+    {{/has_members}}
+
+    {{^has_members}}
+        <div class="alert alert-info">
+            {{#str}}noteammembers, local_soccerteam{{/str}}
+        </div>
+    {{/has_members}}
+</div>
+
+{{#js}}
+require(['jquery'], function($) {
+    // Add helper variables for mustache templates
+    $('.local-soccerteam-overview').data('sort-by', '{{sort_by}}');
+    $('.local-soccerteam-overview').data('sort-direction', '{{sort_direction}}');
+});
+{{/js}}

@@ -15,18 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for Moodle Soccerteam
+ * Renderer for the Soccer team plugin.
  *
  * @package    local_soccerteam
  * @copyright  2025 Khairu Aqsara <wenkhairu@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace local_soccerteam\output;
 
-$plugin->component    = 'local_soccerteam';
-$plugin->release      = '1.0';
-$plugin->version      = 2025050101;
-$plugin->requires     = 2022112800; // Moodle 4.1.
-$plugin->supported    = [401, 500]; // Supported from Moodle 4.1 to 5.0.
-$plugin->maturity     = MATURITY_STABLE;
+/**
+ * Renderer for the soccer team plugin.
+ *
+ * @package    local_soccerteam
+ * @copyright  2025 Khairu Aqsara <wenkhairu@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class renderer extends \plugin_renderer_base {
+
+    /**
+     * Renders the team overview.
+     *
+     * @param \local_soccerteam\output\team_overview $overview The team overview renderable.
+     * @return string HTML content.
+     */
+    public function render_team_overview(\local_soccerteam\output\team_overview $overview) {
+        $data = $overview->export_for_template($this);
+        return $this->render_from_template('local_soccerteam/team_overview', $data);
+    }
+}
