@@ -63,7 +63,8 @@ class team_overview implements renderable, templatable {
 
         // Build SQL query with filters and sorting.
         $params = ['courseid' => $courseid];
-        $sql = "SELECT sa.*, u.firstname, u.lastname, u.email
+        $sql = "SELECT sa.*, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
+                       u.middlename, u.alternatename, u.email
                 FROM {local_soccerteam_assignments} sa
                 JOIN {user} u ON sa.userid = u.id
                 WHERE sa.courseid = :courseid";

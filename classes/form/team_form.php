@@ -69,7 +69,8 @@ class team_form extends moodleform {
         $context = \context_course::instance($courseid);
 
         // Get enrolled students in the course.
-        $students = get_enrolled_users($context, 'moodle/course:isincompletionreports');
+        $students = get_enrolled_users($context, 'moodle/course:isincompletionreports', 0,
+            'u.id, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic, u.middlename, u.alternatename');
         $studentoptions = [];
         foreach ($students as $student) {
             $studentoptions[$student->id] = fullname($student);

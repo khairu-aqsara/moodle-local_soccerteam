@@ -16,6 +16,9 @@
 
 namespace local_soccerteam\external;
 
+defined('MOODLE_INTERNAL') || die();
+require_once("{$CFG->libdir}/externallib.php");
+
 /**
  * Class get_player_details
  *
@@ -72,7 +75,10 @@ class get_player_details extends \external_api {
             throw new \moodle_exception('playernotfound', 'local_soccerteam');
         }
 
-        $user = $DB->get_record('user', ['id' => $playerdata->userid], 'id, firstname, lastname, email');
+        $user = $DB->get_record('user',
+            ['id' => $playerdata->userid],
+            'id, firstname, lastname, firstnamephonetic, lastnamephonetic, middlename, alternatename, email'
+        );
         if (!$user) {
             throw new \moodle_exception('usernotfound', 'local_soccerteam');
         }
