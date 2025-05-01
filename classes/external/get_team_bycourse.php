@@ -16,6 +16,9 @@
 
 namespace local_soccerteam\external;
 
+defined('MOODLE_INTERNAL') || die();
+require_once("{$CFG->libdir}/externallib.php");
+
 /**
  * Class get_team_bycourse
  *
@@ -67,7 +70,11 @@ class get_team_bycourse extends \external_api {
 
         // Prepare data for output.
         foreach ($teamdata as $member) {
-            $user = $DB->get_record('user', ['id' => $member->userid], 'id, firstname, lastname');
+            // Get all required name fields for fullname function.
+            $user = $DB->get_record('user',
+                ['id' => $member->userid],
+                'id, firstname, lastname, firstnamephonetic, lastnamephonetic, middlename, alternatename'
+            );
             if (!$user) {
                 // Skip if user not found.
                 continue;
