@@ -1,3 +1,4 @@
+[![Quality Check And Unit Tests](https://github.com/khairu-aqsara/moodle-local_soccerteam/actions/workflows/main.yml/badge.svg)](https://github.com/khairu-aqsara/moodle-local_soccerteam/actions/workflows/main.yml)
 # Moodle Soccer Team Plugin
 
 A local Moodle plugin that allows course instructors to manage soccer team assignments within courses. This plugin provides functionality to assign students to soccer team positions with unique jersey numbers and view team rosters.
