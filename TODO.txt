@@ -1,0 +1,86 @@
+TODO LIST FOR MOODLE SOCCER TEAM PLUGIN
+=================================
+Last updated: May 1, 2025
+
+FEATURE ENHANCEMENTS
+-------------------
+1. [ ] Increase team size capability
+   - Modify jersey number validation to support larger teams (beyond 25 players)
+   - Add configurable team size setting in admin settings
+
+2. [ ] Enhance position management
+   - Add support for custom/additional positions beyond the current 4 options
+   - Make positions configurable through admin settings
+   - Add position hierarchy or grouping functionality
+
+3. [ ] Multiple teams per course
+   - Implement support for multiple teams within a single course
+   - Add team name field and team selection dropdown
+   - Update database schema to support multiple teams
+
+4. [ ] Course integration
+   - Add automatic role assignment integration with team assignments
+   - Implement notification when team members are unenrolled from course
+
+TECHNICAL IMPROVEMENTS
+--------------------
+5. [ ] Performance optimizations
+   - Implement AJAX-based student selector for improved performance in large courses
+   - Add pagination for team roster in large teams
+
+6. [ ] Database constraints
+   - Implement proper database constraints for jersey numbers
+   - Add database-level unique constraints for student assignments
+
+7. [ ] Web service improvements
+   - Add caching support for API responses
+   - Implement batch processing for large teams
+   - Create additional API endpoints for team management (not just retrieval)
+
+8. [ ] Mobile responsiveness
+   - Improve user interface for small screens
+   - Create responsive alternatives for management actions on mobile devices
+   - Test and optimize for various screen sizes
+
+UI/UX ENHANCEMENTS
+----------------
+9. [ ] Visual representation
+   - Add visual team formation diagram/pitch view
+   - Support for team photos or player avatars
+   - Implement drag-and-drop team position assignment
+
+10. [ ] Reporting features
+    - Add team statistics and reporting capabilities
+    - Export functionality for team roster (CSV, PDF)
+    - Integration with Moodle reporting system
+
+SECURITY & COMPLIANCE
+-------------------
+11. [ ] Privacy API
+    - Complete implementation of privacy API for GDPR compliance
+    - Add user data export and deletion capabilities
+
+12. [ ] API security
+    - Implement rate limiting for API calls
+    - Add enhanced authentication options for web services
+
+TESTING & STABILITY
+-----------------
+13. [ ] Comprehensive test coverage
+    - Increase unit test coverage for edge cases
+    - Add Behat acceptance tests for UI functionality
+    - Implement performance testing for large datasets
+
+14. [ ] Theme compatibility
+    - Test and ensure compatibility with all core Moodle themes
+    - Create guidelines for custom theme integration
+
+DOCUMENTATION
+-----------
+15. [ ] Developer documentation
+    - Create detailed developer documentation for extending the plugin
+    - Document database schema and API structure
+
+16. [ ] End-user help
+    - Create contextual help and tooltips
+    - Add instructional videos for common tasks
