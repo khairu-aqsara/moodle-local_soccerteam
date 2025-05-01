@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component    = 'local_soccerteam';
 $plugin->release      = '1.0';
-$plugin->version      = 2025050101;
+$plugin->version      = 2025050103;
 $plugin->requires     = 2022112800; // Moodle 4.1.
 $plugin->supported    = [401, 500]; // Supported from Moodle 4.1 to 5.0.
 $plugin->maturity     = MATURITY_STABLE;
