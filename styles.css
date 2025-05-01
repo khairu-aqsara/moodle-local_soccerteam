@@ -1,0 +1,33 @@
+/**
+ * Soccer team plugin styles
+ */
+
+.local-soccerteam-overview {
+    margin: 1rem 0;
+}
+
+.local-soccerteam-overview .form-inline {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.local-soccerteam-controls {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.local-soccerteam-controls .form-group {
+    margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+    .local-soccerteam-controls {
+        flex-direction: column;
+    }
+
+    .local-soccerteam-controls .btn {
+        margin-top: 0.5rem;
+    }
+}
