@@ -205,10 +205,6 @@ The Soccer Team plugin has been thoroughly tested but has the following known li
    - Each course can only have one team.
    - No support for multiple teams or team divisions within a course.
 
-4. **No Automated Role Assignment**:
-   - Being assigned to the team does not automatically enroll students in the course.
-   - Team assignments do not automatically update when students are unenrolled from a course.
-
 ### Potential Issues
 
 1. **Large Course Performance**:
